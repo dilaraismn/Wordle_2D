@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,9 +13,10 @@ public class Board : MonoBehaviour
       KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X,
       KeyCode.Y, KeyCode.Z,
    };
-
-   public string[] solutions { get; private set; }
-   public string[] validWords { get; private set; }
+   
+   
+   public string[] solutions;
+   public string[] validWords;
    private Row[] rows;
    private int rowIndex, columnIndex;
    private string word;
@@ -30,7 +32,7 @@ public class Board : MonoBehaviour
    {
       if (UIManager.isTurkish)
       {
-         LoadData("turkish_valid_words", "turkısh_words");
+         LoadData("turkish_words", "allTurkishWords");
       }
       else
       {
@@ -82,6 +84,7 @@ public class Board : MonoBehaviour
 
    private void LoadData(string solutionFile, string allWordsFile)
    {
+      
       TextAsset textFile = Resources.Load(solutionFile) as TextAsset;
       solutions = textFile.text.Split('\n');
 
@@ -150,13 +153,46 @@ public class Board : MonoBehaviour
 
    private bool IsValidWord(string word)
    {
+      // int trueCount = 0;
+      //
+      // foreach (var haydar in validWords)
+      // {
+      //    for (int i = 0; i < 5; i++)
+      //    {
+      //       if (haydar[i] == word[i])
+      //       {
+      //          trueCount++;
+      //       }
+      //    }
+      //
+      //    if (trueCount == 5)
+      //    {
+      //       return true;
+      //    }
+      // }
+      //
+      // return false;
+      
+      
+      // if (validWords.Contains(word))
+      // {
+      //    Debug.Log("haydar1");
+      //    return true;
+      // }
+      // else
+      // {
+      //    Debug.Log("haydar2");
+      //    return false;
+      // }
+      
       for (int i = 0; i < validWords.Length; i++)
       {
-         if (validWords[i] == word)
+         if (validWords[i].StartsWith(word))
          {
             return true;
          }
       }
+      
       return false;
    }
 

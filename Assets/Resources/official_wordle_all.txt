@@ -1,7 +1,3 @@
-tapir
-llano
-balds
-skint
 profs
 paris
 omasa
