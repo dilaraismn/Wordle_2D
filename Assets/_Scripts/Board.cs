@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
@@ -17,15 +13,14 @@ public class Board : MonoBehaviour
       KeyCode.Y, KeyCode.Z,
    };
 
-   private string[] solutions;
-   private string[] validWords;
+   public string[] solutions { get; private set; }
+   public string[] validWords { get; private set; }
    private Row[] rows;
    private int rowIndex, columnIndex;
    private string word;
    
    public Tile.State emptyState, occupiedState, correctState, wrongSpotState, incorrectState;
-   
-   
+
    private void Awake()
    {
       rows = GetComponentsInChildren<Row>();
@@ -33,7 +28,14 @@ public class Board : MonoBehaviour
 
    private void Start()
    {
-      LoadData();
+      if (UIManager.isTurkish)
+      {
+         LoadData("turkish_valid_words", "turkısh_words");
+      }
+      else
+      {
+         LoadData("official_wordle_common", "official_wordle_all");
+      }
       NewGame();
    }
 
@@ -77,15 +79,14 @@ public class Board : MonoBehaviour
       //word = "ugurc";
       print(word);
    }
-   
-   private void LoadData()
+
+   private void LoadData(string solutionFile, string allWordsFile)
    {
-      TextAsset textFile = Resources.Load("official_wordle_common") as TextAsset;
+      TextAsset textFile = Resources.Load(solutionFile) as TextAsset;
       solutions = textFile.text.Split('\n');
 
-      textFile = Resources.Load("official_wordle_all") as TextAsset;
+      textFile = Resources.Load(allWordsFile) as TextAsset;
       validWords = textFile.text.Split('\n');
-      //turkish_words_list
    }
 
    private void SubmitRow(Row row)
@@ -143,7 +144,6 @@ public class Board : MonoBehaviour
 
       if (rowIndex >= rows.Length)
       {
-         //Fail
          enabled = false;
       }
    }
