@@ -21,6 +21,9 @@ public class Board : MonoBehaviour
    private int rowIndex, columnIndex;
    private string word;
 
+   public Tile.State emptyState, occupiedState, correctState, wrongSpotState, incorrectState;
+   
+   
    private void Awake()
    {
       rows = GetComponentsInChildren<Row>();
@@ -41,6 +44,7 @@ public class Board : MonoBehaviour
       {
          columnIndex = Mathf.Max(columnIndex - 1, 0);
          currentRow.tiles[columnIndex].SetLetter('\0');
+         currentRow.tiles[columnIndex].SetState(emptyState);
       }
       else if (columnIndex >= currentRow. tiles.Length)
       {
@@ -56,6 +60,7 @@ public class Board : MonoBehaviour
             if (Input.GetKeyDown(SUPPORTED_KEYS[i]))
             {
                currentRow.tiles[columnIndex].SetLetter((char) SUPPORTED_KEYS[i]);
+               currentRow.tiles[columnIndex].SetState(occupiedState);
                columnIndex++;
                break;
             }
@@ -87,15 +92,15 @@ public class Board : MonoBehaviour
          Tile tile = row.tiles[i];
          if (tile.letter == word[i])
          {
-            //currect
+            tile.SetState(correctState);
          }
          else if (word.Contains(tile.letter.ToString()))
          {
-            //wrong place
+            tile.SetState(wrongSpotState);
          }
          else
          {
-            //incorrect
+            tile.SetState(incorrectState);
          }
       }
 

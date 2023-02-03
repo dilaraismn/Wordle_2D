@@ -412,7 +412,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.22570309, g: 0.22570309, b: 0.2264151, a: 0}
+  m_BackGroundColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -540,6 +540,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06941f378c4d43b4fabdcc8f45c4c921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emptyState:
+    fillColor: {r: 0.18039216, g: 0.18039216, b: 0.18039216, a: 1}
+    outlineColor: {r: 0.48235294, g: 0.48235294, b: 0.48235294, a: 1}
+  occupiedState:
+    fillColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
+    outlineColor: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+  correctState:
+    fillColor: {r: 0.38121507, g: 0.7075472, b: 0.35154855, a: 1}
+    outlineColor: {r: 0.38039216, g: 0.7058824, b: 0.3529412, a: 1}
+  wrongSpotState:
+    fillColor: {r: 0.972549, g: 0.7725767, b: 0, a: 1}
+    outlineColor: {r: 0.972549, g: 0.77254903, b: 0, a: 1}
+  incorrectState:
+    fillColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+    outlineColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
 --- !u!1001 &1081202117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -798,7 +813,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
