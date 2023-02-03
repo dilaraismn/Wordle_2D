@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
 {
+   [SerializeField] private GameObject notValidUI;
    private static readonly KeyCode[] SUPPORTED_KEYS = new KeyCode[] 
    {
       KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F,
@@ -16,7 +17,7 @@ public class Board : MonoBehaviour
    };
 
    private string[] solutions;
-   private string[] validWord;
+   private string[] validWords;
    private Row[] rows;
    private int rowIndex, columnIndex;
    private string word;
@@ -35,7 +36,6 @@ public class Board : MonoBehaviour
       SetRandomWord();
    }
 
-   
    private void Update()
    {
       Row currentRow = rows[rowIndex];
@@ -45,6 +45,7 @@ public class Board : MonoBehaviour
          columnIndex = Mathf.Max(columnIndex - 1, 0);
          currentRow.tiles[columnIndex].SetLetter('\0');
          currentRow.tiles[columnIndex].SetState(emptyState);
+         notValidUI.SetActive(false);
       }
       else if (columnIndex >= currentRow. tiles.Length)
       {
@@ -66,7 +67,6 @@ public class Board : MonoBehaviour
             }
          }
       }
-     
    }
 
    private void SetRandomWord()
@@ -79,15 +79,21 @@ public class Board : MonoBehaviour
    
    private void LoadData()
    {
-      TextAsset TextFile = Resources.Load("official_wordle_all") as TextAsset;
-      validWord = TextFile.text.Split('\n');
-      
-      TextFile = Resources.Load("official_wordle_common") as TextAsset;
-      solutions = TextFile.text.Split('\n');
+      TextAsset textFile = Resources.Load("official_wordle_common") as TextAsset;
+      solutions = textFile.text.Split('\n');
+
+      textFile = Resources.Load("official_wordle_all") as TextAsset;
+      validWords = textFile.text.Split('\n');
+      //turkish_words_list
    }
-   
+
    private void SubmitRow(Row row)
    {
+      if (!IsValidWord(row.word))
+      {
+         notValidUI.SetActive(true);
+         return;
+      }
       string remaining = word;
       for (int i = 0; i < row.tiles.Length; i++)
       {
@@ -134,5 +140,17 @@ public class Board : MonoBehaviour
          //Fail
          enabled = false;
       }
+   }
+
+   private bool IsValidWord(string word)
+   {
+      for (int i = 0; i < validWords.Length; i++)
+      {
+         if (validWords[i] == word)
+         {
+            return true;
+         }
+      }
+      return false;
    }
 }
