@@ -82,6 +82,30 @@ public class Board : MonoBehaviour
    
    private void SubmitRow(Row row)
    {
-      
+      for (int i = 0; i < row.tiles.Length; i++)
+      {
+         Tile tile = row.tiles[i];
+         if (tile.letter == word[i])
+         {
+            //currect
+         }
+         else if (word.Contains(tile.letter.ToString()))
+         {
+            //wrong place
+         }
+         else
+         {
+            //incorrect
+         }
+      }
+
+      rowIndex++;
+      columnIndex = 0;
+
+      if (rowIndex >= rows.Length)
+      {
+         //Fail
+         enabled = false;
+      }
    }
 }
