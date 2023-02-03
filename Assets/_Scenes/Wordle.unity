@@ -412,7 +412,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.07058824, g: 0.07058824, b: 0.07450981, a: 0}
+  m_BackGroundColor: {r: 0.22570309, g: 0.22570309, b: 0.2264151, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -469,6 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1003527690}
   - component: {fileID: 1003527691}
+  - component: {fileID: 1003527692}
   m_Layer: 5
   m_Name: GameBoard
   m_TagString: Untagged
@@ -527,6 +528,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1003527692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003527689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06941f378c4d43b4fabdcc8f45c4c921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1081202117
 PrefabInstance:
   m_ObjectHideFlags: 0
