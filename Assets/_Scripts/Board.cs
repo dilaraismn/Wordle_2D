@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
 {
-   [SerializeField] private GameObject notValidUI, tryAgainButton, newWordButton;
+   [SerializeField] private GameObject notValidUI, newWordButton;
    private static readonly KeyCode[] SUPPORTED_KEYS = new KeyCode[] 
    {
       KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F,
@@ -34,7 +34,7 @@ public class Board : MonoBehaviour
    private void Start()
    {
       LoadData();
-      SetRandomWord();
+      NewGame();
    }
 
    private void Update()
@@ -169,19 +169,38 @@ public class Board : MonoBehaviour
             return false;
          }
       }
-      print("win");
       return true;
    }
 
+   void ClearBoard()
+   {
+      for (int row = 0; row < rows.Length; row++)
+      {
+         for (int column = 0; column < rows[row].tiles.Length; column++)
+         {
+            rows[row].tiles[column].SetLetter('\0');
+            rows[row].tiles[column].SetState(emptyState);
+         }
+      }
+
+      rowIndex = 0;
+      columnIndex = 0;
+   }
+   
    private void OnEnable()
    {
-      tryAgainButton.SetActive(false);
       newWordButton.SetActive(false);
    }
 
    private void OnDisable()
    {
-      tryAgainButton.SetActive(true);
       newWordButton.SetActive(true);
+   }
+   
+   public void NewGame()
+   {
+      ClearBoard();
+      SetRandomWord();
+      enabled = true;
    }
 }
