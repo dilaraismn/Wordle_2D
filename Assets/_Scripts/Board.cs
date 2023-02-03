@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
 {
-   [SerializeField] private GameObject notValidUI;
+   [SerializeField] private GameObject notValidUI, tryAgainButton, newWordButton;
    private static readonly KeyCode[] SUPPORTED_KEYS = new KeyCode[] 
    {
       KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F,
@@ -21,7 +22,7 @@ public class Board : MonoBehaviour
    private Row[] rows;
    private int rowIndex, columnIndex;
    private string word;
-
+   
    public Tile.State emptyState, occupiedState, correctState, wrongSpotState, incorrectState;
    
    
@@ -132,6 +133,11 @@ public class Board : MonoBehaviour
          }
       }
 
+      if (IsWin(row))
+      {
+         enabled = false;
+      }
+      
       rowIndex++;
       columnIndex = 0;
 
@@ -152,5 +158,30 @@ public class Board : MonoBehaviour
          }
       }
       return false;
+   }
+
+   private bool IsWin(Row row)
+   {
+      for (int i = 0; i < row.tiles.Length; i++)
+      {
+         if (row.tiles[i].state != correctState)
+         {
+            return false;
+         }
+      }
+      print("win");
+      return true;
+   }
+
+   private void OnEnable()
+   {
+      tryAgainButton.SetActive(false);
+      newWordButton.SetActive(false);
+   }
+
+   private void OnDisable()
+   {
+      tryAgainButton.SetActive(true);
+      newWordButton.SetActive(true);
    }
 }
