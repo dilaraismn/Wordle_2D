@@ -14,6 +14,8 @@ public class Board : MonoBehaviour
       KeyCode.Y, KeyCode.Z,
    };
 
+   private string[] solutions;
+   private string[] validWord;
    private Row[] rows;
    private int rowIndex, columnIndex;
 
@@ -22,6 +24,12 @@ public class Board : MonoBehaviour
       rows = GetComponentsInChildren<Row>();
    }
 
+   private void Start()
+   {
+      LoadData();
+   }
+
+   
    private void Update()
    {
       Row currentRow = rows[rowIndex];
@@ -33,7 +41,10 @@ public class Board : MonoBehaviour
       }
       else if (columnIndex >= currentRow. tiles.Length)
       {
-        
+         if (Input.GetKeyDown(KeyCode.Return))
+         {
+            SubmitRow(currentRow);  
+         }
       }
       else
       {
@@ -48,5 +59,19 @@ public class Board : MonoBehaviour
          }
       }
      
+   }
+
+   private void LoadData()
+   {
+      TextAsset TextFile = Resources.Load("official_wordle_all") as TextAsset;
+      validWord = TextFile.text.Split('\n');
+      
+      TextFile = Resources.Load("official_wordle_common") as TextAsset;
+      solutions = TextFile.text.Split('\n');
+   }
+   
+   private void SubmitRow(Row row)
+   {
+      
    }
 }
