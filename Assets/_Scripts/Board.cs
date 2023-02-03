@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Board : MonoBehaviour
    private string[] validWord;
    private Row[] rows;
    private int rowIndex, columnIndex;
+   private string word;
 
    private void Awake()
    {
@@ -27,6 +29,7 @@ public class Board : MonoBehaviour
    private void Start()
    {
       LoadData();
+      SetRandomWord();
    }
 
    
@@ -61,6 +64,13 @@ public class Board : MonoBehaviour
      
    }
 
+   private void SetRandomWord()
+   {
+      word = solutions[Random.Range(0, solutions.Length)];
+      word = word.ToLower().Trim(); //make thme lower case and trim any blanks
+      print(word);
+   }
+   
    private void LoadData()
    {
       TextAsset TextFile = Resources.Load("official_wordle_all") as TextAsset;
